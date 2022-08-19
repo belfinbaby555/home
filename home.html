@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <title>Main Page -Chat Room</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <div class="header">
+        <button id="logout" onclick="window.location='/logout'"><img src="img2.png" class="img2">Logout</button>
+        <button id="donate" onclick="window.location='/donate'"><img src="img4.png" class="img4">Donate</button>
+        <button onclick="userbar()" class="nav">&#x21b4;</button>
+        <div id="me">
+            <label id="label"> {{me}}<label>
+        </div>
+        
+    </div>
+        <div class="user" id="users">
+            <div id="update_user_here" >
+                {% for i in users %}
+                <div id="user">
+                  <img src="g14513.png"class="img1"> {{ i }}
+                </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+        <div class="message">
+            <div id="update" >
+                {% for message in msg %}
+                <p class="other" id="getm">
+                  {{ message }}
+                </p>
+                {% endfor %}
+                <div class="mymsg" id="mymsg"></div>
+            </div>
+            <form id="searchForm" name="searchForm">
+
+                <input autofocus class="text" type="text" autocomplete="off" placeholder="Type your message here....." id="message" name="message" required>
+                <button class="button" type="submit"><img src="img3.png" class="img3"></button>
+            </form>
+        </div>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script>
+            var u=document.getElementById("users");
+
+            function userbar(){
+              if(u.style.display === "inherit"){
+                u.style.display = "none";
+              }
+              else{
+                u.style.display = "inherit";
+              }
+            }
+        </script>
+
+  <script>
+    var viewMode = getCookie("view-mode");
+    if(viewMode == "desktop"){
+        viewport.setAttribute('content', 'width=1024');
+    }else if (viewMode == "mobile"){
+        viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
+    }
+  </script>
+  <script>
+    var text="";
+    $(function(){
+      window.setInterval(function(){loadnewdata()},1000)
+    function loadnewdata(){
+      $.ajax({
+        url:'/update',
+        type:'POST',
+        dataType:'json',
+        success:function(data){
+          //$(update).replaceWith(data);
+          var checking = data;
+          console.log(checking)
+          //console.log(data);
+          //console.log(update)
+          var value = checking[1];
+          if (text!=value){
+                $(update).replaceWith(checking);
+                var audio = new Audio("https://encryptedmasterchat.pythonanywhere.com/static/autdio.mp3");
+                audio.play();
+                $("#update").animate({ scrollTop: ($('#update').height()+100000000000000000000000000000) }, 1000);
+            text=value;
+          }
+
+        }
+
+      });
+    }
+  });
+  $(function() {
+  $("#searchForm").submit(function(e) {
+    e.preventDefault();
+        $.ajax({
+            url: '/getM',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+                $("input[id='message']").val("");
+                var audio = new Audio("https://encryptedmasterchat.pythonanywhere.com/static/Message%20Notification%20Sound%20_%20SMS%20Tone%20_%20Message%20Ringtoneaudio-mp3.mp3");
+                audio.play();
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+    var check="";
+    $(function(){
+      window.setInterval(function(){loadnewdata()},1000)
+    function loadnewdata(){
+      $.ajax({
+        url:'/update_user_here',
+        type:'POST',
+        dataType:'json',
+        success:function(data1){
+          $(update_user_here).replaceWith(data1);
+          var value1 = document.getElementById("update_user_here").innerHTML; 
+          if (check!=value1){
+            check=value1;
+                            var audio = new Audio("https://encryptedmasterchat.pythonanywhere.com/static/mixkit-long-pop-2358.wav");
+                audio.play();
+          }
+
+        }
+
+      });
+    }
+  });
+</script>
+    </body>
+</html>
