@@ -254,7 +254,7 @@ body{
         height: 45px;
     }
     #donate:hover{
-        display: none;
+        visibility: hidden;
     }
 
     #logout{
@@ -263,7 +263,7 @@ body{
         margin: 4 2% 0 0px;
     }
     #logout:hover{
-        display: none;
+        visibility: hidden;
     }
     .img2{
         width: 30px;
