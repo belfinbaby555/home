@@ -253,10 +253,17 @@ body{
         width:45px;
         height: 45px;
     }
+    #donate:hover{
+        display: none;
+    }
+
     #logout{
         width:45px;
         height: 45px;
         margin: 4 2% 0 0px;
+    }
+    #logout:hover{
+        display: none;
     }
     .img2{
         width: 30px;
