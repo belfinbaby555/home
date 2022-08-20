@@ -195,23 +195,32 @@ body{
     display: none;
 }
 @media (max-width : 425px) {
+    body{
+        overflow-y: hidden;
+    }
     ::-webkit-scrollbar-thumb{
         background-color: rgba(54, 86, 145, 0);
     }
     .header{
-        height: 9.5%;
+        height: 55px;
         
     }
     .text{
-        height: 9.5%;
+        height: 55px;
         width:80%;
         position: fixed;
         z-index: 4;
     }
+    #searchForm{
+        display: flex;
+        align-items: flex-end;
+    }
     .button{
-        height: 10.5%;
+        position: fixed;
+        height: 55px;
         float: right;
         width:20%;
+        margin-left: 80%;
         
     }
     .user{
@@ -226,7 +235,13 @@ body{
         overflow: visible;
     }
     #update{
-        height:90%;
+        height:100%;
+    }
+    @media(max-height:450px){
+        #update{
+            height:95%;
+        }
+
     }
     #label{
         font-size: 18px;
